@@ -22,14 +22,13 @@ public class StringOps {
     //////                                               ///////
     ////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        // System.out.println(capVowelsLowRest("vowels are fun"));
-        // System.out.println(camelCase(word));
-        String word = "MMMM";
-        char chr = 'M';
-        int[] indexes = allIndexOf(word, chr);
-        for (int i = 0; i < indexes.length; i++) {
-            System.out.println(indexes[i]);
-        }
+       
+      //  String word = "aaa";
+       // char chr = 'a';
+       // int[] indexes = allIndexOf(word, chr);
+       // for (int i = 0; i < indexes.length; i++) {
+        //    System.out.println(indexes[i]);
+       // }
     }
 
     //returns the index of c in the given array
@@ -43,146 +42,162 @@ public class StringOps {
         return -1;
     }
 
-    //returns if a char is lower case
-    public static boolean isLowerCase(char c) {
-        return c >= 'a' && c <= 'z';
+
+
+    //checks if a char is upper case
+    public static boolean IsUpperCase(char c) {
+        boolean IsUp = false;
+        if(c >= 'A' && c <= 'Z'){
+            IsUp = true;
+        }
+        return IsUp;
     }
 
-    //returns if a char is upper case
-    public static boolean isUpperCase(char c) {
-        return c >= 'A' && c <= 'Z';
+    //checks if a char is lower case
+    public static boolean IsLowerCase(char c) {
+        boolean IsLow = false; 
+        if(c >= 'a' && c <= 'z'){
+            IsLow = true;
+        }
+
+        return IsLow;
     }
 
-    //returns the lower case of a char
-    public static char lowerCase(char c) {
-        return (char) ( c + 32) ;
-    }
 
     //returns the upper case of a char
-    public static char upperCase(char c) {
-        return (char) ( c - 32) ;
+    public static char ToUpperCase(char c) {
+        char NewChar = c;
+        NewChar = (char)(c-32);
+        return NewChar ;
     }
+
+
+    //returns the lower case of a char
+    public static char ToLowerCase(char c) {
+        char NewChar = c;
+        NewChar = (char)(c+32);
+        return NewChar ;
+    }
+
 
     //if a char is one of (a,e,i,o,u) than it's uppercased
     //any other char is lowercased
     public static String capVowelsLowRest (String string) {
 
         char[] vowels = new char[] {'a','e','i','o','u', 'A', 'E', 'I', 'O', 'U'};
-        String newStr = "";
+        String newString = "";
 
         for (int i = 0; i < string.length(); i++) {
             if (indexOf(vowels, string.charAt(i)) != -1) {
-                if (isLowerCase(string.charAt(i))) {
-                    newStr += upperCase(string.charAt(i));
+                if (IsLowerCase(string.charAt(i))) {
+                    newString += ToUpperCase(string.charAt(i));
                 }
                 else {
-                    newStr += string.charAt(i);
+                    newString += string.charAt(i);
                 }
             }
             else if (string.charAt(i) == ' ') {
-                newStr += string.charAt(i);
+                newString += string.charAt(i);
             }
             else {
-                if (isUpperCase(string.charAt(i))) {
-                    newStr += lowerCase(string.charAt(i));
+                if (IsUpperCase(string.charAt(i))) {
+                    newString += ToLowerCase(string.charAt(i));
                 }
                 else {
-                    newStr += string.charAt(i);
+                    newString += string.charAt(i);
                 }
             }
         }
         
-        return newStr;
+        return newString;
     }
 
-    //returns the first index after a space in
-    //the given string
+    //returns the first index after a space in a  given string
     public static int indexAfterSpace(String string) {
 
-        int firstIndex = 0;
+        int FIndex = 0;
 
         for (int i = 0; i < string.length(); i++) {
 
             if (string.charAt(i) != ' ') {
-                firstIndex = i;
+                FIndex = i;
                 break;
             }
         }
 
-        return firstIndex;
+        return FIndex;
     }
 
-    //returns the first index of a space in
-    //the given string
+    //returns the first index of a space in a given string
     public static int indexTillSpace(String string) {
 
-        int firstIndex = 0;
+        int FIndex = 0;
 
         for (int i = 0; i < string.length(); i++) {
 
             if (string.charAt(i) == ' ') {
-                firstIndex = i;
+                FIndex = i;
                 break;
             }
         }
 
-        return firstIndex;
+        return FIndex;
     }
 
-    //returns lower case string
+    //return a new string with lowered case string
     public static String lowerCaseWord(String string) {
-        String lowerCaseStr = "";
+        String lowCaseStr = "";
 
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == ' ') {
-                return lowerCaseStr;
+                return lowCaseStr;
             }
             
-            if (isUpperCase(string.charAt(i))) {
-                lowerCaseStr += lowerCase(string.charAt(i));
+            if (IsUpperCase(string.charAt(i))) {
+                lowCaseStr += ToLowerCase(string.charAt(i));
             }
             else {
-                lowerCaseStr += string.charAt(i);
+                lowCaseStr += string.charAt(i);
             }
         }
 
-        return lowerCaseStr;
+        return lowCaseStr;
     }
 
-    //returns first letter upper case than lower case string
-    public static String firstUpperThanlowerWord(String string) {
+    //returns a new string with first letter upper case than lower case 
+    public static String UpAndLow(String string) {
         
-        String lowerCaseStr = "";
+        String lowCaseString = "";
         if (string.length() > 0) {
 
-            if (isLowerCase(string.charAt(0))) {
-                lowerCaseStr += upperCase(string.charAt(0));
+            if (IsLowerCase(string.charAt(0))) {
+                lowCaseString += ToUpperCase(string.charAt(0));
             }
             else {
-                lowerCaseStr += string.charAt(0);
+                lowCaseString += string.charAt(0);
             }
 
             for (int i = 1; i < string.length(); i++) {
                 if (string.charAt(i) == ' ') {
-                    return lowerCaseStr;
+                    return lowCaseString;
                 }
 
-                if (isUpperCase(string.charAt(i))) {
-                    lowerCaseStr += lowerCase(string.charAt(i));
+                if (IsUpperCase(string.charAt(i))) {
+                    lowCaseString += ToLowerCase(string.charAt(i));
                 }
                 else {
-                    lowerCaseStr += string.charAt(i);
+                    lowCaseString += string.charAt(i);
                 }
             }
 
-            return lowerCaseStr;
+            return lowCaseString;
         }
 
-        return lowerCaseStr;
+        return lowCaseString;
     }
 
     //returns the number of words in a string
-    public static int numOfWordsInString(String string) {
+    public static int WordCounter(String string) {
 
         int count = 1;
         boolean isWord = true;
@@ -208,7 +223,7 @@ public class StringOps {
 
     public static String[] wordsInString(String string) {
 
-        String[] words = new String[numOfWordsInString(string)];
+        String[] words = new String[WordCounter(string)];
 
         for (int i = 0; i < words.length; i++) { 
             words[i] = "";
@@ -249,14 +264,14 @@ public class StringOps {
         camelCaseStr += lowerCaseWord(words[0]);
 
         for  (int i = 1; i < words.length; i++) {
-            camelCaseStr += firstUpperThanlowerWord(words[i]);
+            camelCaseStr += UpAndLow(words[i]);
         }
         
         return camelCaseStr;
     }
 
-    //calculates how many times chr appears in string
-    public static int countChrInString (String string, char chr) {
+    //checks how many times chr appears in string
+    public static int CountStr (String string, char chr) {
         
         int count = 0;
 
@@ -272,7 +287,7 @@ public class StringOps {
     //returns the indexes of chr appears in string
     public static int[] allIndexOf (String string, char chr) {
         
-        int[] indexes = new int[countChrInString(string, chr)];
+        int[] indexes = new int[CountStr(string, chr)];
         int currentIndex = 0;
 
         for (int i = 0; i < string.length(); i++) {
